@@ -43,7 +43,7 @@ const SocialMedia = () => {
   const icons = { Linkedin, Facebook, Github, Instagram };
 
   return (
-    <div className=" flex mt-10 justify-center gap-2">
+    <div className=" flex mt-10 pb-5 justify-center gap-2">
       {socialLinks.map(({ id, url, icon }) => {
         const Icon = icons[icon];
 
