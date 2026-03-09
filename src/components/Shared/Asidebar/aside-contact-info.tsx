@@ -57,10 +57,13 @@ const AsideContactInfo = () => {
         {userData.map(({ id, title, value, icon }) => {
           const Icon = icons[icon];
           return (
-            <div key={id} className="min-w-0">
-              <div className="flex gap-3">
+            <div key={id} className="min-w-0 group">
+              <div className="flex gap-3 ">
                 <div className="bgIcon relative flex h-12 w-12 items-center justify-center rounded-xl">
-                  <Icon color="var(--primary)" />
+                  <Icon
+                    color="var(--primary)"
+                    className="transition-transform group-hover:scale-110"
+                  />
                 </div>
                 <div className="min-w-0 flex-1 overflow-hidden">
                   <h1 className="text-muted-foreground text-xs">{title}</h1>

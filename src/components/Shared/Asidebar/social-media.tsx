@@ -48,9 +48,16 @@ const SocialMedia = () => {
         const Icon = icons[icon];
 
         return (
-          <div key={id} className="bgGradient p-2 rounded">
+          <div
+            key={id}
+            className="bgGradient p-2 rounded group hover:shadow-lg transition"
+          >
             <Link href={url} target="_blank">
-              <Icon color="var(--primary)" size={16} />{" "}
+              <Icon
+                color="var(--primary)"
+                className="transition-transform duration-300 group-hover:scale-110"
+                size={16}
+              />
             </Link>
           </div>
         );
