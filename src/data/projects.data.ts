@@ -7,7 +7,7 @@ export const projects: Project[] = [
     description:
       "Production-grade role-based web app for managing shared living spaces with real-time meal tracking, expense management, and secure member invitations.",
     image: "/mess-manager.png",
-    liveUrl: "https://mess-manager.vercel.app",
+    liveUrl: "https://mess-manager-prod.vercel.app/",
     category: "Full Stack",
     techStack: [
       "Next.js",
@@ -26,7 +26,7 @@ export const projects: Project[] = [
     description:
       "Web-based telemedicine platform enabling patients to consult verified doctors through real-time in-app video calls, receive digital prescriptions, and manage healthcare remotely in a secure environment.",
     image: "/shifa.png",
-    liveUrl: "https://shifa-telemedicine.vercel.app",
+    liveUrl: "https://shifa-medi.vercel.app",
     category: "Full Stack",
     techStack: [
       "Next.js",
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     description:
       "Professional portfolio website showcasing web development projects, skills, and experience with modern design and interactive components.",
     image: "/sojibahmed_pfp.jpg",
-    liveUrl: "https://sojib-ahmed.netlify.app",
+    liveUrl: "https://sojibahmed.vercel.app",
     category: "Portfolio",
     techStack: [
       "React",

@@ -14,14 +14,14 @@ const socialLinks: socialLinksType[] = [
     id: 1,
     title: "LinkedIn",
     username: "Sheikh A. Sojib",
-    url: "https://linkedin.com/in/ahmedsojib/",
+    url: "https://linkedin.com/in/sojibahmed-me/",
     icon: "Linkedin",
   },
   {
     id: 2,
     title: "Facebook",
     username: "Sheikh Sojib",
-    url: "https://facebook.com/sojibahmed.dev",
+    url: "https://facebook.com/sojibahmed.me",
     icon: "Facebook",
   },
   {
