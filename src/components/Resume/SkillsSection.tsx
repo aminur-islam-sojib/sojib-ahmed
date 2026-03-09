@@ -2,7 +2,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { SkillGroup } from "./SkillGroup";
-import { skillCategories } from "./data";
+import { skillCategories } from "../../data/skills.data";
 import { BookOpen } from "lucide-react";
 
 export const SkillsSection = () => {
