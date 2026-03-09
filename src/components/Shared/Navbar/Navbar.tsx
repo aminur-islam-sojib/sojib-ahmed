@@ -12,7 +12,7 @@ const Navbar = () => {
     { name: "resume", path: "/resume" },
     { name: "projects", path: "/projects" },
     { name: "contact", path: "/contact" },
-    { name: "download cv", path: "/cv.pdf" }, // or external link
+    { name: "download cv", path: "/download-cv" },
   ];
 
   return (
@@ -30,12 +30,10 @@ const Navbar = () => {
             <Link key={index} href={tab.path}>
               <button
                 className={`relative capitalize text-[13px] lg:text-[15px] cursor-pointer font-medium transition-colors duration-300 ease-in-out whitespace-nowrap ${
-                  isActive && tab.name !== "download cv"
-                    ? "text-primary"
-                    : "text-white hover:text-gray-400"
+                  isActive ? "text-primary" : "text-white hover:text-gray-400"
                 }`}
               >
-                {isActive && tab.name !== "download cv" && (
+                {isActive && (
                   <motion.span
                     layoutId="activeTab"
                     className="absolute -bottom-0.5 md:-bottom-1 left-0 right-0 h-0.5 bg-primary"
@@ -51,7 +49,7 @@ const Navbar = () => {
                 <motion.span
                   initial={false}
                   animate={{
-                    scale: isActive && tab.name !== "download cv" ? 1.05 : 1,
+                    scale: isActive ? 1.05 : 1,
                   }}
                   transition={{ duration: 0.2 }}
                   className="inline-block"
