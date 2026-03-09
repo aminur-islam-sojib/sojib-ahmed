@@ -6,7 +6,7 @@ export const projects: Project[] = [
     name: "Mess Manager",
     description:
       "Production-grade role-based web app for managing shared living spaces with real-time meal tracking, expense management, and secure member invitations.",
-    image: "/mess-manager.png",
+    image: "/mess_manager.png",
     liveUrl: "https://mess-manager-prod.vercel.app/",
     category: "Full Stack",
     techStack: [

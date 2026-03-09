@@ -1,17 +1,70 @@
-import EducationTimeLine from "@/components/Resume/EducationTimeLine";
-import ExperienceTimeLine from "@/components/Resume/ExperienceTimeLine";
-import { SkillsSection } from "@/components/Resume/SkillsSection";
+"use client";
+
+import dynamic from "next/dynamic";
 import HeaderGenerator from "@/components/ui/HeaderGenerator";
+import { Suspense } from "react";
+
+// Dynamically import heavy components with animations
+const EducationTimeLine = dynamic(
+  () => import("@/components/Resume/EducationTimeLine"),
+  {
+    loading: () => (
+      <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
+    ),
+    ssr: true,
+  },
+);
+
+const ExperienceTimeLine = dynamic(
+  () => import("@/components/Resume/ExperienceTimeLine"),
+  {
+    loading: () => (
+      <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
+    ),
+    ssr: true,
+  },
+);
+
+const SkillsSection = dynamic(
+  () =>
+    import("@/components/Resume/SkillsSection").then((mod) => ({
+      default: mod.SkillsSection,
+    })),
+  {
+    loading: () => (
+      <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
+    ),
+    ssr: true,
+  },
+);
 
 const Resume = () => {
   return (
     <main>
       <HeaderGenerator>Resume</HeaderGenerator>
-      <EducationTimeLine />
-      <div className=" my-10">
-        <ExperienceTimeLine />
+      <Suspense
+        fallback={
+          <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
+        }
+      >
+        <EducationTimeLine />
+      </Suspense>
+      <div className="my-10">
+        <Suspense
+          fallback={
+            <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
+          }
+        >
+          <ExperienceTimeLine />
+        </Suspense>
       </div>
-      <SkillsSection />
+      <Suspense
+        fallback={
+          <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
+        }
+      >
+        <SkillsSection />
+      </Suspense>
     </main>
   );
 };

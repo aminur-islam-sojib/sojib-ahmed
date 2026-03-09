@@ -18,6 +18,7 @@ const PersonalInfo = () => {
             width={110}
             height={110}
             priority
+            quality={85}
             className="h-27.5 w-27.5 rounded-2xl object-cover"
           />
         </figure>

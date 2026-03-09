@@ -1,9 +1,20 @@
 "use client";
-// import ClientReview from "./ClientReview";
-import AboutCards from "@/components/About/AboutCards";
-import CanDoList from "@/components/About/CanDoList";
+
+import dynamic from "next/dynamic";
 import HeaderGenerator from "@/components/ui/HeaderGenerator";
 import { motion } from "framer-motion";
+import { Suspense } from "react";
+
+// Dynamically import components below the fold
+const AboutCards = dynamic(() => import("@/components/About/AboutCards"), {
+  loading: () => <div className="h-48 bg-[#202022] rounded-lg animate-pulse" />,
+  ssr: true,
+});
+
+const CanDoList = dynamic(() => import("@/components/About/CanDoList"), {
+  loading: () => <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />,
+  ssr: true,
+});
 
 const About = () => {
   return (
@@ -41,10 +52,22 @@ const About = () => {
           </span>
         </motion.div>
         <div className=" my-10">
-          <AboutCards />
+          <Suspense
+            fallback={
+              <div className="h-48 bg-[#202022] rounded-lg animate-pulse" />
+            }
+          >
+            <AboutCards />
+          </Suspense>
         </div>
         <div>
-          <CanDoList />
+          <Suspense
+            fallback={
+              <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
+            }
+          >
+            <CanDoList />
+          </Suspense>
         </div>
         <div className="mt-5">{/* <ClientReview /> */}</div>
       </div>

@@ -28,7 +28,11 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
           alt={project.name}
           fill
           className="w-full h-full object-cover transition-all group-hover:scale-110 duration-300 group-hover:brightness-50"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          loading={index < 3 ? "eager" : "lazy"}
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23202022' width='400' height='300'/%3E%3C/svg%3E"
         />
 
         <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
