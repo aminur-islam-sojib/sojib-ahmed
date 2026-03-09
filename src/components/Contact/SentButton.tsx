@@ -1,15 +1,22 @@
 import { Send } from "lucide-react";
 
-export default function SentButton() {
+interface SentButtonProps {
+  disabled?: boolean;
+}
+
+export default function SentButton({ disabled = false }: SentButtonProps) {
   return (
     <div className=" flex w-full md:justify-end my-5">
       <button
-        className="relative w-full  h-12 md:w-auto px-5 rounded-xl text-primary bg-[#1e1e1f]  cursor-pointer border-none z-1 group"
+        className={`relative w-full  h-12 md:w-auto px-5 rounded-xl text-primary bg-[#1e1e1f]  cursor-pointer border-none z-1 group ${
+          disabled ? "opacity-60 cursor-not-allowed" : ""
+        }`}
         style={{
           boxShadow: "0 2px 5px #00000040",
           transition: "0.25s ease-in",
         }}
         type="submit"
+        disabled={disabled}
       >
         {/* ::before pseudo-element - Gradient border (default state) */}
         <span
@@ -69,7 +76,7 @@ export default function SentButton() {
         {/* Button text */}
         <span className=" flex gap-2 justify-center ">
           {" "}
-          <Send /> Send Message
+          <Send /> {disabled ? "Sending..." : "Send Message"}
         </span>
       </button>
     </div>
