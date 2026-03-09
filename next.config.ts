@@ -13,7 +13,6 @@ const nextConfig: NextConfig = {
 
   // Compression and optimization
   compress: true,
-  swcMinify: true,
   poweredByHeader: false,
 
   // Headers for security and performance
