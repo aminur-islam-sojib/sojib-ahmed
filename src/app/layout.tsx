@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import AsideBar from "@/components/Shared/Asidebar/Asidebar";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // Optimize font loading with preload and only essential weights
 const poppins = Poppins({
@@ -156,7 +156,7 @@ export default function RootLayout({
             </main>
           </section>
         </section> 
-          <Analytics/>
+        <Analytics/>
         <SpeedInsights/>
       </body>
     
