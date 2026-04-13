@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Poppins } from "next/font/google";
-import "./globals.css";
 import { cn } from "@/lib/utils";
+import "./globals.css";
 
 import AsideBar from "@/components/Shared/Asidebar/Asidebar";
 import Navbar from "@/components/Shared/Navbar/Navbar";
