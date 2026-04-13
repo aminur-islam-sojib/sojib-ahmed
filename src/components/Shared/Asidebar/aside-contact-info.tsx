@@ -18,7 +18,7 @@ const userData: userDataType[] = [
   {
     id: 2,
     title: "PHONE",
-    value: "+8801757829428",
+    value: "+8801522110607",
     icon: "PhoneCall",
   },
   {
