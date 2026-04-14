@@ -240,7 +240,10 @@ cp .env.example .env.local
 NEXT_PUBLIC_BASE_URL=https://sojibahmed.vercel.app
 NEXT_PUBLIC_GA_ID=your-ga-id-here
 NEXT_PUBLIC_GOOGLE_VERIFICATION=your-code-here
+GITHUB_TOKEN=your-github-token-here
 ```
+
+`GITHUB_TOKEN` is optional but recommended for GitHub API rate limits and accurate pinned repository stats.
 
 ---
 

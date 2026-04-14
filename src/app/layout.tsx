@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Poppins } from "next/font/google";
-import "./globals.css";
 import { cn } from "@/lib/utils";
+import "./globals.css";
 
 import AsideBar from "@/components/Shared/Asidebar/Asidebar";
 import Navbar from "@/components/Shared/Navbar/Navbar";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // Optimize font loading with preload and only essential weights
 const poppins = Poppins({
@@ -153,8 +155,11 @@ export default function RootLayout({
               </div>
             </main>
           </section>
-        </section>
+        </section> 
+        <Analytics/>
+        <SpeedInsights/>
       </body>
+    
     </html>
   );
 }
