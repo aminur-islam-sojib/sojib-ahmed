@@ -25,8 +25,9 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
       <div className="relative group w-auto h-40 rounded-t-xl overflow-hidden shadow-lg">
         <Image
           src={project.image}
-          alt={project.name}
+          alt={`${project.name} - Web Application Project by Aminur Islam Sojib`}
           fill
+
           className="w-full h-full object-cover transition-all group-hover:scale-110 duration-300 group-hover:brightness-50"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           loading={index < 3 ? "eager" : "lazy"}

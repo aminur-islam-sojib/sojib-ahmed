@@ -71,7 +71,7 @@ export const metadata: Metadata = {
       "@type": "Person",
       name: "Sojib Ahmed",
       jobTitle: "Full Stack Web Developer",
-      image: `${baseUrl}/sojibahmed_pfp.jpg`,
+      image: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
     }),
   }}
 />
@@ -415,7 +415,7 @@ const poppins = Poppins({
       "name": "Sojib Ahmed",
       "jobTitle": "Full Stack Web Developer",
       "url": "https://sojibahmed.vercel.app",
-      "image": "https://sojibahmed.vercel.app/sojibahmed_pfp.jpg"
+      "image": "https://sojibahmed.vercel.app/aminur-islam-sojib-profile-photo.jpg"
     }
   </script>
 

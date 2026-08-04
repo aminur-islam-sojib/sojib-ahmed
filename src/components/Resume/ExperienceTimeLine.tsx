@@ -4,12 +4,34 @@ import { motion } from "framer-motion";
 import { BriefcaseBusiness } from "lucide-react";
 
 const experiences = [
-  {
+    {
     id: 1,
-    company: "Junior Full-Stack Developer",
-    role: " Freelance / Personal",
+    company: "Softvence",
+    role: "Frontend Developer",
+    duration: "2026 — Present",
+    description: "Developing and maintaining high-quality frontend web applications.",
+    responsibilities: [
+      "Collaborated with cross-functional teams to deliver high-quality web applications on time",
+      "Built and maintained reusable components using React and TypeScript",
+      "Optimized application performance and user experience",
+      "Participated in code reviews and provided constructive feedback",
+      "Implemented responsive designs for optimal viewing across devices"
+    ]
+  },{
+    id: 2,
+    company: "Freelance Full-Stack Developer",
+    role: "Freelance / Personal Projects",
     duration: "2024 — Present",
-  },
+    description: "Building full-stack web applications using Next.js, React, Node.js, and MongoDB for clients worldwide.",
+    responsibilities: [
+      "Developed responsive and user-friendly interfaces using React and Next.js",
+      "Implemented backend systems with Node.js and Express.js",
+      "Integrated MongoDB for database management",
+      "Collaborated with clients to understand requirements and deliver tailored solutions",
+      "Managed project timelines and delivered high-quality work within deadlines"
+    ]
+  }
+
 ];
 
 const ExperienceTimeLine = () => {

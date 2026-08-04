@@ -31,25 +31,28 @@ const baseUrl =
 
 export const metadata: Metadata = {
   title: {
-    default: "Sojib Ahmed - Full Stack Web Developer",
-    template: "%s | Sojib Ahmed",
+    default: "Aminur Islam Sojib - Fullstack Developer | Next.js & React",
+    template: "%s | Aminur Islam Sojib",
   },
   description:
-    "Full stack web developer specializing in Next.js, React, Node.js, and MongoDB. Building scalable, user-friendly web applications.",
+    "Aminur Islam Sojib (Sojib Ahmed) is a Fullstack Developer at Softvence specializing in Next.js, React, and MongoDB based in Dhaka, Bangladesh.",
   keywords: [
-    "Web Developer",
-    "Next.js",
-    "React",
-    "Node.js",
+    "Aminur Islam Sojib",
+    "Sojib Ahmed",
+    "Sojib",
+    "Aminur Islam",
+    "Fullstack Developer",
+    "Next.js Developer",
+    "React Developer",
     "MongoDB",
-    "Full Stack",
-    "Web Development",
-    "Frontend",
-    "Backend",
-    "TypeScript",
+    "Dhaka Bangladesh Developer",
+    "Softvence",
+    "Shifa Healthcare",
+    "Mess Manager",
+    "Web Developer Portfolio",
   ],
-  authors: [{ name: "Sojib Ahmed", url: baseUrl }],
-  creator: "Sojib Ahmed",
+  authors: [{ name: "Aminur Islam Sojib", url: baseUrl }],
+  creator: "Aminur Islam Sojib",
   metadataBase: new URL(baseUrl),
   alternates: {
     canonical: baseUrl,
@@ -58,25 +61,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: baseUrl,
-    siteName: "Sojib Ahmed - Web Developer",
-    title: "Sojib Ahmed - Full Stack Web Developer",
+    siteName: "Aminur Islam Sojib - Portfolio",
+    title: "Aminur Islam Sojib - Fullstack Developer | Next.js & React",
     description:
-      "Full stack web developer specializing in Next.js, React, Node.js, and MongoDB.",
+      "Fullstack Developer at Softvence specializing in Next.js, React, and MongoDB based in Dhaka, Bangladesh.",
     images: [
       {
-        url: `${baseUrl}/og-image.png`,
+        url: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
         width: 1200,
         height: 630,
-        alt: "Sojib Ahmed - Web Developer",
+        alt: "Aminur Islam Sojib - Fullstack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sojib Ahmed - Full Stack Web Developer",
+    title: "Aminur Islam Sojib - Fullstack Developer | Next.js & React",
     description:
-      "Full stack web developer specializing in Next.js, React, Node.js, and MongoDB.",
-    images: [`${baseUrl}/og-image.png`],
+      "Fullstack Developer at Softvence specializing in Next.js, React, and MongoDB based in Dhaka, Bangladesh.",
+    images: [`${baseUrl}/aminur-islam-sojib-profile-photo.jpg`],
   },
   robots: {
     index: true,
@@ -91,6 +94,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 import Script from "next/script";
 
 export default function RootLayout({
@@ -98,15 +102,55 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
+  const jsonLdGraph = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Sojib Ahmed",
-    url: baseUrl,
-    jobTitle: "Full Stack Web Developer",
-    image: `${baseUrl}/sojibahmed_pfp.jpg`,
-    description:
-      "Full stack web developer specializing in Next.js, React, Node.js, and MongoDB.",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${baseUrl}/#person`,
+        name: "Aminur Islam Sojib",
+        alternateName: ["Sojib", "Sojib Ahmed", "Aminur", "Aminur Islam"],
+        url: baseUrl,
+        jobTitle: "Fullstack Developer",
+        worksFor: {
+          "@type": "Organization",
+          name: "Softvence",
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Dhaka",
+          addressCountry: "Bangladesh",
+        },
+        image: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
+        sameAs: [
+          "https://github.com/aminur-islam-sojib",
+          "https://linkedin.com/in/aminur-islam-sojib",
+          "https://codeforces.com/profile/sojibahmed.me",
+        ],
+        description:
+          "Fullstack Developer at Softvence specializing in Next.js, React, and MongoDB based in Dhaka, Bangladesh.",
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${baseUrl}/#website`,
+        url: baseUrl,
+        name: "Aminur Islam Sojib - Portfolio",
+        description:
+          "Official Portfolio Website of Aminur Islam Sojib (Fullstack Developer at Softvence)",
+        publisher: {
+          "@id": `${baseUrl}/#person`,
+        },
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": `${baseUrl}/#profilepage`,
+        url: baseUrl,
+        name: "Aminur Islam Sojib Profile Page",
+        mainEntity: {
+          "@id": `${baseUrl}/#person`,
+        },
+      },
+    ],
   };
 
   return (
@@ -135,7 +179,7 @@ export default function RootLayout({
         <Script
           id="json-ld-schema"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
         {children}
         <Analytics />
@@ -144,4 +188,5 @@ export default function RootLayout({
     </html>
   );
 }
+
 

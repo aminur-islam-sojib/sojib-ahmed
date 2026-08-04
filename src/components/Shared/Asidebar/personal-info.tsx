@@ -13,14 +13,15 @@ const PersonalInfo = () => {
       >
         <figure className=" p-2 bgGradient rounded-3xl">
           <Image
-            src="/sojibahmed_pfp.jpg"
-            alt="Sojib Ahmed, Frontend Web Developer"
+            src="/aminur-islam-sojib-profile-photo.jpg"
+            alt="Aminur Islam Sojib - Fullstack Developer at Softvence"
             width={110}
             height={110}
             priority
             quality={85}
             className="h-27.5 w-27.5 rounded-2xl object-cover"
           />
+
         </figure>
       </motion.div>
       <div className=" flex mt-2 lg:mt-0 flex-col">

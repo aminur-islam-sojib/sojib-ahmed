@@ -1,72 +1,40 @@
-"use client";
+import type { Metadata } from "next";
+import ResumeClientView from "@/components/Resume/ResumeClientView";
 
-import dynamic from "next/dynamic";
-import HeaderGenerator from "@/components/ui/HeaderGenerator";
-import { Suspense } from "react";
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://sojibahmed.vercel.app";
 
-// Dynamically import heavy components with animations
-const EducationTimeLine = dynamic(
-  () => import("@/components/Resume/EducationTimeLine"),
-  {
-    loading: () => (
-      <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
-    ),
-    ssr: true,
+export const metadata: Metadata = {
+  title: "Resume & Professional Skills | Aminur Islam Sojib",
+  description:
+    "Review the education, professional work experience at Softvence, and technical skills breakdown of Aminur Islam Sojib (Sojib Ahmed), Fullstack Developer in Dhaka, Bangladesh.",
+  alternates: {
+    canonical: `${baseUrl}/resume`,
   },
-);
-
-const ExperienceTimeLine = dynamic(
-  () => import("@/components/Resume/ExperienceTimeLine"),
-  {
-    loading: () => (
-      <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
-    ),
-    ssr: true,
+  openGraph: {
+    title: "Resume & Professional Skills | Aminur Islam Sojib",
+    description:
+      "Review the professional experience at Softvence, education, and technical skills of Aminur Islam Sojib (Sojib Ahmed).",
+    url: `${baseUrl}/resume`,
+    siteName: "Aminur Islam Sojib Portfolio",
+    images: [
+      {
+        url: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Aminur Islam Sojib Resume",
+      },
+    ],
   },
-);
-
-const SkillsSection = dynamic(
-  () =>
-    import("@/components/Resume/SkillsSection").then((mod) => ({
-      default: mod.SkillsSection,
-    })),
-  {
-    loading: () => (
-      <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
-    ),
-    ssr: true,
+  twitter: {
+    card: "summary_large_image",
+    title: "Resume & Professional Skills | Aminur Islam Sojib",
+    description:
+      "Review the education, experience at Softvence, and technical skills of Aminur Islam Sojib.",
+    images: [`${baseUrl}/aminur-islam-sojib-profile-photo.jpg`],
   },
-);
-
-const Resume = () => {
-  return (
-    <main>
-      <HeaderGenerator>Resume</HeaderGenerator>
-      <Suspense
-        fallback={
-          <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
-        }
-      >
-        <EducationTimeLine />
-      </Suspense>
-      <div className="my-10">
-        <Suspense
-          fallback={
-            <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
-          }
-        >
-          <ExperienceTimeLine />
-        </Suspense>
-      </div>
-      <Suspense
-        fallback={
-          <div className="h-96 bg-[#202022] rounded-lg animate-pulse" />
-        }
-      >
-        <SkillsSection />
-      </Suspense>
-    </main>
-  );
 };
 
-export default Resume;
+export default function ResumePage() {
+  return <ResumeClientView />;
+}

@@ -45,7 +45,7 @@ export const projects: Project[] = [
     name: "Sojib Ahmed - Web Developer",
     description:
       "Professional portfolio website showcasing web development projects, skills, and experience with modern design and interactive components.",
-    image: "/sojibahmed_pfp.jpg",
+    image: "/aminur-islam-sojib-profile-photo.jpg",
     liveUrl: "https://sojibahmed.vercel.app",
     category: "Portfolio",
     techStack: [
