@@ -1,11 +1,33 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import HeaderGenerator from "@/components/ui/HeaderGenerator";
 import DownloadButton from "@/components/Download/DownloadButton";
 import FullscreenButton from "@/components/Download/FullscreenButton";
 
 const DownloadCVPage = () => {
+  const [cvUrl, setCvUrl] = useState("/Sojib_Ahmed_Resume.pdf");
+  const [description, setDescription] = useState(
+    "Preview my resume below. You can also download a copy to review in your own time or open it in fullscreen for a better viewing experience."
+  );
+
+  useEffect(() => {
+    async function loadCv() {
+      try {
+        const res = await fetch("/api/cv");
+        const json = await res.json();
+        if (json.success && json.data) {
+          if (json.data.cvUrl) setCvUrl(json.data.cvUrl);
+          if (json.data.description) setDescription(json.data.description);
+        }
+      } catch (err) {
+        console.error("Failed to load CV settings:", err);
+      }
+    }
+    loadCv();
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -37,9 +59,7 @@ const DownloadCVPage = () => {
         {/* Description Section */}
         <motion.div variants={itemVariants} className="space-y-3">
           <p className="text-base text-gray-300 tracking-tight leading-relaxed">
-            Preview my resume below. You can also download a copy to review in
-            your own time or open it in fullscreen for a better viewing
-            experience.
+            {description}
           </p>
         </motion.div>
 
@@ -51,10 +71,10 @@ const DownloadCVPage = () => {
           <div className="relative w-full border border-[#383838] rounded-2xl shadow-lg overflow-hidden bg-[#1a1a1a]">
             {/* Loading state and iframe */}
             <iframe
-              src="/Sojib_Ahmed_Resume.pdf"
+              src={cvUrl}
               title="Sojib Ahmed Resume"
               aria-label="Resume preview"
-              className="w-full h-96 sm:h-125 md:h-187.5 rounded-2xl"
+              className="w-full h-96 sm:h-125 md:h-187.5 rounded-2xl border-none"
             />
           </div>
         </motion.div>
@@ -66,19 +86,19 @@ const DownloadCVPage = () => {
         >
           {/* Download Button */}
           <div>
-            <DownloadButton />
+            <DownloadButton cvUrl={cvUrl} />
           </div>
 
           {/* Open Fullscreen Button */}
           <div>
-            <FullscreenButton />
+            <FullscreenButton cvUrl={cvUrl} />
           </div>
         </motion.div>
 
         {/* Additional Info */}
         <motion.div
           variants={itemVariants}
-          className="max-w-4xl mx-auto w-full  text-center"
+          className="max-w-4xl mx-auto w-full text-center"
         >
           <p className="text-sm text-gray-400">
             Having trouble viewing the preview? Download the PDF or open it in a

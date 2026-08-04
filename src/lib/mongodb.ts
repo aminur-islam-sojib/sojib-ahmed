@@ -100,8 +100,34 @@ export async function getContactCollection() {
 }
 
 /**
+ * Get the analytics views collection
+ */
+export async function getAnalyticsCollection() {
+  const { db } = await connectToDatabase();
+  return db.collection("analytics_views");
+}
+
+/**
+ * Get the projects collection
+ */
+export async function getProjectsCollection() {
+  const { db } = await connectToDatabase();
+  return db.collection("projects");
+}
+
+/**
+ * Get the CV settings collection
+ */
+export async function getCvCollection() {
+  const { db } = await connectToDatabase();
+  return db.collection("cv_settings");
+}
+
+
+/**
  * Close database connection (optional, not always needed in serverless)
  */
+
 export async function closeConnection(): Promise<void> {
   if (cachedClient) {
     await cachedClient.close();

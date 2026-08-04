@@ -2,18 +2,21 @@ import { Eye } from "lucide-react";
 
 interface SentButtonProps {
   disabled?: boolean;
+  cvUrl?: string;
 }
 
 export default function FullscreenButton({
   disabled = false,
+  cvUrl = "/Sojib_Ahmed_Resume.pdf",
 }: SentButtonProps) {
   return (
     <div className=" flex w-full md:justify-end my-5">
       <a
-        href="/Sojib_Ahmed_Resume.pdf"
+        href={cvUrl}
         className={`relative w-full  h-12 md:w-auto px-5 rounded-xl text-primary bg-[#1e1e1f]  cursor-pointer border-none z-1 group ${
           disabled ? "opacity-60 cursor-not-allowed" : ""
         }`}
+
         style={{
           boxShadow: "0 2px 5px #00000040",
           transition: "0.25s ease-in",
