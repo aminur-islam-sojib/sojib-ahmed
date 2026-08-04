@@ -1,5 +1,6 @@
 import AsideBar from "@/components/Shared/Asidebar/Asidebar";
 import Navbar from "@/components/Shared/Navbar/Navbar";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 
 export default function PublicLayout({
   children,
@@ -8,6 +9,7 @@ export default function PublicLayout({
 }) {
   return (
     <section className="pb-10 max-w-7xl mx-auto">
+      <AnalyticsTracker />
       <section className="grid grid-cols-4 py-5 pb-12 md:pb-0 sm:py-12 px-5 sm:px-5 md:px-10 gap-5 sm:gap-10">
         <aside className="col-span-4 lg:col-span-1">
           <div className="sticky top-12 overflow-y-auto">
@@ -28,3 +30,4 @@ export default function PublicLayout({
     </section>
   );
 }
+

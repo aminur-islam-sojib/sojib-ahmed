@@ -7,7 +7,8 @@ export type ProjectCategory =
   | "Portfolio";
 
 export interface Project {
-  id: number;
+  _id?: string;
+  id: number | string;
   name: string;
   description: string;
   image: string;
@@ -17,3 +18,4 @@ export interface Project {
   githubClient?: string; // Optional: Only for projects with separate repos
   githubServer?: string; // Optional: Only for Full Stack projects
 }
+
