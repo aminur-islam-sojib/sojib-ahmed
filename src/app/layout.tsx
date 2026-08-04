@@ -6,7 +6,7 @@ import "./globals.css";
 import AsideBar from "@/components/Shared/Asidebar/Asidebar";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Optimize font loading with preload and only essential weights
 const poppins = Poppins({
@@ -137,7 +137,7 @@ export default function RootLayout({
         className={`${geistMono.variable} antialiased bg-[#121212]`}
         suppressHydrationWarning
       >
-        <section className="pb-10">
+        <section className="pb-10 max-w-7xl mx-auto">
           <section className="grid grid-cols-4 py-5 pb-12 md:pb-0 sm:py-12 px-5 sm:px-5 md:px-10 gap-5 sm:gap-10">
             <aside className="col-span-4 lg:col-span-1">
               <div className="sticky top-12 overflow-y-auto">
@@ -155,11 +155,10 @@ export default function RootLayout({
               </div>
             </main>
           </section>
-        </section> 
-        <Analytics/>
-        <SpeedInsights/>
+        </section>
+        <Analytics />
+        <SpeedInsights />
       </body>
-    
     </html>
   );
 }
