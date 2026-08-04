@@ -1,8 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getAnalyticsCollection, getContactCollection, getProjectsCollection } from "@/lib/mongodb";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const range = searchParams.get("range") || "14d"; // "7d" | "14d" | "30d" | "lifetime"
+
     const analyticsCol = await getAnalyticsCollection();
     const contactCol = await getContactCollection();
     const projectsCol = await getProjectsCollection();
@@ -48,44 +51,81 @@ export async function GET() {
       count: item.count,
     }));
 
-    // 7. Daily Views over the last 14 days
-    const fourteenDaysAgo = new Date();
-    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 13);
-    fourteenDaysAgo.setHours(0, 0, 0, 0);
+    // 7. Dynamic Daily Views based on range parameter
+    let daysCount = 14;
+    if (range === "7d") daysCount = 7;
+    if (range === "30d") daysCount = 30;
 
-    const dailyViewsAgg = await analyticsCol
-      .aggregate([
-        { $match: { timestamp: { $gte: fourteenDaysAgo } } },
+    let pipeline: any[] = [];
+
+    if (range === "lifetime") {
+      pipeline = [
         {
           $group: {
-            _id: {
-              $dateToString: { format: "%Y-%m-%d", date: "$timestamp" },
-            },
+            _id: { $dateToString: { format: "%Y-%m-%d", date: "$timestamp" } },
             views: { $sum: 1 },
           },
         },
         { $sort: { _id: 1 } },
-      ])
-      .toArray();
+      ];
+    } else {
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - (daysCount - 1));
+      startDate.setHours(0, 0, 0, 0);
 
-    // Fill in missing dates in the 14-day range
-    const dailyMap = new Map(dailyViewsAgg.map((item) => [item._id, item.views]));
-    const dailyViews = [];
-    for (let i = 13; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split("T")[0];
-      dailyViews.push({
-        date: dateStr,
-        views: dailyMap.get(dateStr) || 0,
-      });
+      pipeline = [
+        { $match: { timestamp: { $gte: startDate } } },
+        {
+          $group: {
+            _id: { $dateToString: { format: "%Y-%m-%d", date: "$timestamp" } },
+            views: { $sum: 1 },
+          },
+        },
+        { $sort: { _id: 1 } },
+      ];
     }
 
-    // 8. Recent 10 Visitor Logs
+    const dailyViewsAgg = await analyticsCol.aggregate(pipeline).toArray();
+    const dailyMap = new Map(dailyViewsAgg.map((item) => [item._id, item.views]));
+
+    let dailyViews: { date: string; views: number }[] = [];
+
+    if (range === "lifetime") {
+      if (dailyViewsAgg.length > 0) {
+        const firstDateStr = dailyViewsAgg[0]._id;
+        const firstDate = new Date(firstDateStr);
+        const today = new Date();
+
+        const cur = new Date(firstDate);
+        while (cur <= today) {
+          const dateStr = cur.toISOString().split("T")[0];
+          dailyViews.push({
+            date: dateStr,
+            views: dailyMap.get(dateStr) || 0,
+          });
+          cur.setDate(cur.getDate() + 1);
+        }
+      } else {
+        const dateStr = new Date().toISOString().split("T")[0];
+        dailyViews.push({ date: dateStr, views: 0 });
+      }
+    } else {
+      for (let i = daysCount - 1; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateStr = d.toISOString().split("T")[0];
+        dailyViews.push({
+          date: dateStr,
+          views: dailyMap.get(dateStr) || 0,
+        });
+      }
+    }
+
+    // 8. Recent Visitor Logs
     const recentViews = await analyticsCol
       .find({})
       .sort({ timestamp: -1 })
-      .limit(10)
+      .limit(15)
       .toArray();
 
     return NextResponse.json({
@@ -99,6 +139,7 @@ export async function GET() {
         topReferrers,
         dailyViews,
         recentViews,
+        range,
       },
     });
   } catch (error) {

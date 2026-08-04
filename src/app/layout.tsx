@@ -91,18 +91,32 @@ export const metadata: Metadata = {
   },
 };
 
+import Script from "next/script";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Sojib Ahmed",
+    url: baseUrl,
+    jobTitle: "Full Stack Web Developer",
+    image: `${baseUrl}/sojibahmed_pfp.jpg`,
+    description:
+      "Full stack web developer specializing in Next.js, React, Node.js, and MongoDB.",
+  };
+
   return (
     <html
       lang="en"
       data-theme={APP_THEME}
       className={cn("dark font-sans scroll-smooth", poppins.variable)}
+      suppressHydrationWarning
     >
-      <head>
+      <head suppressHydrationWarning>
         {/* Preconnect to external domains for better performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -113,28 +127,16 @@ export default function RootLayout({
 
         {/* DNS prefetch for external services */}
         <link rel="dns-prefetch" href="https://api.github.com" />
-
-        {/* JSON-LD Schema for rich snippets */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Sojib Ahmed",
-              url: baseUrl,
-              jobTitle: "Full Stack Web Developer",
-              image: `${baseUrl}/sojibahmed_pfp.jpg`,
-              description:
-                "Full stack web developer specializing in Next.js, React, Node.js, and MongoDB.",
-            }),
-          }}
-        />
       </head>
       <body
         className={`${geistMono.variable} antialiased bg-[#121212]`}
         suppressHydrationWarning
       >
+        <Script
+          id="json-ld-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />
@@ -142,3 +144,4 @@ export default function RootLayout({
     </html>
   );
 }
+

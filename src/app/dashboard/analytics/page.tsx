@@ -9,7 +9,7 @@ import {
   Clock,
   RefreshCw,
   Compass,
-  Monitor,
+  Calendar,
 } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
@@ -17,14 +17,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { AnalyticsStats } from "@/types/analytics";
 
+type TimeRange = "7d" | "14d" | "30d" | "lifetime";
+
 export default function AnalyticsPage() {
   const [stats, setStats] = useState<AnalyticsStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [timeRange, setTimeRange] = useState<TimeRange>("14d");
 
-  const loadStats = async () => {
+  const loadStats = async (range: TimeRange = timeRange) => {
     setLoading(true);
     try {
-      const res = await fetch("/api/analytics/stats");
+      const res = await fetch(`/api/analytics/stats?range=${range}`);
       const json = await res.json();
       if (json.success) {
         setStats(json.data);
@@ -37,16 +40,29 @@ export default function AnalyticsPage() {
   };
 
   useEffect(() => {
-    loadStats();
-  }, []);
+    loadStats(timeRange);
+  }, [timeRange]);
 
   const topRoute = stats?.topRoutes?.[0]?.route || "/";
   const topReferrer = stats?.topReferrers?.[0]?.referrer || "Direct";
 
+  const getRangeLabel = (range: TimeRange) => {
+    switch (range) {
+      case "7d":
+        return "Last 7 Days";
+      case "14d":
+        return "Last 14 Days";
+      case "30d":
+        return "Last 30 Days";
+      case "lifetime":
+        return "Lifetime (All Time)";
+    }
+  };
+
   return (
     <div className="flex flex-1 flex-col gap-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4">
+      {/* Header with Time Range Selectors */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Visitor Analytics</h1>
           <p className="text-sm text-muted-foreground">
@@ -54,9 +70,31 @@ export default function AnalyticsPage() {
           </p>
         </div>
 
-        <Button size="sm" variant="outline" onClick={loadStats} className="flex items-center gap-1.5 text-xs">
-          <RefreshCw className={`size-3.5 ${loading ? "animate-spin" : ""}`} /> Refresh Data
-        </Button>
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Time Range Filter Buttons */}
+          <div className="flex items-center gap-1 bg-muted/60 p-1 rounded-lg border border-border text-xs">
+            {(["7d", "14d", "30d", "lifetime"] as TimeRange[]).map((r) => (
+              <button
+                key={r}
+                onClick={() => setTimeRange(r)}
+                className={`px-2.5 py-1 rounded-md transition-colors ${
+                  timeRange === r
+                    ? "bg-background text-foreground shadow-xs font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {r === "7d" && "7 Days"}
+                {r === "14d" && "14 Days"}
+                {r === "30d" && "30 Days"}
+                {r === "lifetime" && "Lifetime"}
+              </button>
+            ))}
+          </div>
+
+          <Button size="sm" variant="outline" onClick={() => loadStats(timeRange)} className="flex items-center gap-1.5 text-xs">
+            <RefreshCw className={`size-3.5 ${loading ? "animate-spin" : ""}`} /> Refresh
+          </Button>
+        </div>
       </div>
 
       {/* Analytics Stat Cards */}
@@ -110,13 +148,17 @@ export default function AnalyticsPage() {
 
       {/* Main Traffic Chart */}
       <Card className="bg-card border-border">
-        <CardHeader>
-          <CardTitle className="text-base font-semibold">Visitor Traffic (Last 14 Days)</CardTitle>
-          <CardDescription className="text-xs">
-            Real-time daily pageview counts logged automatically across public pages
-          </CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle className="text-base font-semibold flex items-center gap-2">
+              <Calendar className="size-4 text-primary" /> Traffic Trend ({getRangeLabel(timeRange)})
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Daily visitor pageviews logged automatically for {getRangeLabel(timeRange).toLowerCase()}
+            </CardDescription>
+          </div>
         </CardHeader>
-        <CardContent className="h-[300px] w-full pt-4">
+        <CardContent className="h-[320px] w-full pt-4">
           {stats?.dailyViews && stats.dailyViews.length > 0 ? (
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={stats.dailyViews}>
