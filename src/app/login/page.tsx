@@ -24,7 +24,7 @@ function LoginForm() {
       return;
     }
 
-    setLoading(true);
+    setLoading(true);  
 
     try {
       const res = await fetch("/api/auth/login", {
