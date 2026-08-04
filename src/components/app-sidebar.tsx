@@ -15,7 +15,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, ChartBarIcon, FolderIcon, MailIcon, Globe, CommandIcon } from "lucide-react"
+import { LayoutDashboardIcon, ChartBarIcon, FolderIcon, MailIcon, FileTextIcon, Globe, CommandIcon } from "lucide-react"
 
 const data = {
   user: {
@@ -45,12 +45,18 @@ const data = {
       icon: <MailIcon />,
     },
     {
+      title: "Manage CV",
+      url: "/dashboard/cv",
+      icon: <FileTextIcon />,
+    },
+    {
       title: "View Website",
       url: "/",
       icon: <Globe />,
     },
   ],
 }
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (

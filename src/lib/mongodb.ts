@@ -116,6 +116,15 @@ export async function getProjectsCollection() {
 }
 
 /**
+ * Get the CV settings collection
+ */
+export async function getCvCollection() {
+  const { db } = await connectToDatabase();
+  return db.collection("cv_settings");
+}
+
+
+/**
  * Close database connection (optional, not always needed in serverless)
  */
 
