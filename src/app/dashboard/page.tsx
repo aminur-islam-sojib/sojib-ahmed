@@ -51,6 +51,7 @@ export default function DashboardPage() {
   const [projectsLoading, setProjectsLoading] = useState(true);
   const [isEditingProject, setIsEditingProject] = useState<Project | null>(null);
   const [showProjectModal, setShowProjectModal] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [projectFormData, setProjectFormData] = useState({
     name: "",
     description: "",
@@ -61,6 +62,36 @@ export default function DashboardPage() {
     githubClient: "",
     githubServer: "",
   });
+
+  // Handle direct file upload to ImgBB
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const json = await res.json();
+      if (json.success && json.url) {
+        setProjectFormData((prev) => ({ ...prev, image: json.url }));
+      } else {
+        alert("Failed to upload image to ImgBB: " + (json.message || "Unknown error"));
+      }
+    } catch (err) {
+      console.error("Upload error:", err);
+      alert("Error uploading image to ImgBB");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
 
   // Messages State
   const [messages, setMessages] = useState<ContactMsg[]>([]);
@@ -671,26 +702,56 @@ export default function DashboardPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label htmlFor="p-cat" className="text-xs">Category</Label>
+              <div className="space-y-1">
+                <Label htmlFor="p-cat" className="text-xs">Category</Label>
+                <Input
+                  id="p-cat"
+                  value={projectFormData.category}
+                  onChange={(e) => setProjectFormData({ ...projectFormData, category: e.target.value as ProjectCategory })}
+                  placeholder="Full Stack, Web Development, etc."
+                />
+              </div>
+
+              {/* ImgBB Image Upload Section */}
+              <div className="space-y-2 border border-border/80 p-3 rounded-lg bg-muted/20">
+                <Label className="text-xs font-semibold flex items-center gap-1.5">
+                  Project Cover Image (ImgBB)
+                </Label>
+
+                <div className="flex items-center gap-2">
                   <Input
-                    id="p-cat"
-                    value={projectFormData.category}
-                    onChange={(e) => setProjectFormData({ ...projectFormData, category: e.target.value as ProjectCategory })}
-                    placeholder="Full Stack, Web Development, etc."
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    disabled={uploadingImage}
+                    className="text-xs cursor-pointer file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
                   />
+                  {uploadingImage && (
+                    <span className="text-xs text-primary animate-pulse whitespace-nowrap">
+                      Uploading to ImgBB...
+                    </span>
+                  )}
                 </div>
-                <div className="space-y-1">
-                  <Label htmlFor="p-image" className="text-xs">Image Path / URL</Label>
+
+                <div className="flex items-center gap-2 pt-1">
                   <Input
                     id="p-image"
                     value={projectFormData.image}
                     onChange={(e) => setProjectFormData({ ...projectFormData, image: e.target.value })}
-                    placeholder="/mess_manager.png"
+                    placeholder="https://i.ibb.co/... or /mess_manager.png"
+                    className="text-xs font-mono"
                   />
+                  {projectFormData.image && (
+                    <img
+                      src={projectFormData.image}
+                      alt="Project Preview"
+                      className="w-10 h-10 object-cover rounded-md border border-border shrink-0"
+                      onError={(e) => (e.currentTarget.style.display = "none")}
+                    />
+                  )}
                 </div>
               </div>
+
 
               <div className="space-y-1">
                 <Label htmlFor="p-tech" className="text-xs">Tech Stack (comma separated)</Label>
