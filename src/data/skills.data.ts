@@ -3,7 +3,7 @@ import { Terminal, Database, Layout, Server } from "lucide-react";
 
 export const skillCategories = [
   {
-    title: "Frontend",
+    title: "Fullstack",
     icon: Layout,
     skills: [
       {

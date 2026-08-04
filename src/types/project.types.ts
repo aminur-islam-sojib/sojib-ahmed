@@ -1,7 +1,7 @@
 export type ProjectCategory =
   | "Full Stack"
   | "Web Development"
-  | "Frontend"
+  | "Fullstack"
   | "Mobile"
   | "UI/UX"
   | "Portfolio";
