@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Aminur Islam Sojib Portfolio",
     images: [
       {
-        url: `${baseUrl}/sojibahmed_pfp.jpg`,
+        url: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
         width: 1200,
         height: 630,
         alt: "Aminur Islam Sojib Projects",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Projects Showcase | Aminur Islam Sojib",
     description:
       "Explore full-stack web applications built with Next.js, React, and MongoDB by Aminur Islam Sojib.",
-    images: [`${baseUrl}/sojibahmed_pfp.jpg`],
+    images: [`${baseUrl}/aminur-islam-sojib-profile-photo.jpg`],
   },
 };
 

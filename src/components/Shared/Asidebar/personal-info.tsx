@@ -13,7 +13,7 @@ const PersonalInfo = () => {
       >
         <figure className=" p-2 bgGradient rounded-3xl">
           <Image
-            src="/sojibahmed_pfp.jpg"
+            src="/aminur-islam-sojib-profile-photo.jpg"
             alt="Aminur Islam Sojib - Fullstack Developer at Softvence"
             width={110}
             height={110}

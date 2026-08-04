@@ -67,7 +67,7 @@ export const metadata: Metadata = {
       "Fullstack Developer at Softvence specializing in Next.js, React, and MongoDB based in Dhaka, Bangladesh.",
     images: [
       {
-        url: `${baseUrl}/sojibahmed_pfp.jpg`,
+        url: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
         width: 1200,
         height: 630,
         alt: "Aminur Islam Sojib - Fullstack Developer",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: "Aminur Islam Sojib - Fullstack Developer | Next.js & React",
     description:
       "Fullstack Developer at Softvence specializing in Next.js, React, and MongoDB based in Dhaka, Bangladesh.",
-    images: [`${baseUrl}/sojibahmed_pfp.jpg`],
+    images: [`${baseUrl}/aminur-islam-sojib-profile-photo.jpg`],
   },
   robots: {
     index: true,
@@ -121,7 +121,7 @@ export default function RootLayout({
           addressLocality: "Dhaka",
           addressCountry: "Bangladesh",
         },
-        image: `${baseUrl}/sojibahmed_pfp.jpg`,
+        image: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
         sameAs: [
           "https://github.com/aminur-islam-sojib",
           "https://linkedin.com/in/aminur-islam-sojib",

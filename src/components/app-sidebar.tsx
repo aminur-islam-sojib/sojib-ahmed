@@ -21,7 +21,7 @@ const data = {
   user: {
     name: "Sojib Ahmed",
     email: "admin@sojibahmed.dev",
-    avatar: "/sojibahmed_pfp.jpg",
+    avatar: "/aminur-islam-sojib-profile-photo.jpg",
   },
   navMain: [
     {

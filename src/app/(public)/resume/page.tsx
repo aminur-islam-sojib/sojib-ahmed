@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Aminur Islam Sojib Portfolio",
     images: [
       {
-        url: `${baseUrl}/sojibahmed_pfp.jpg`,
+        url: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
         width: 1200,
         height: 630,
         alt: "Aminur Islam Sojib Resume",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Resume & Professional Skills | Aminur Islam Sojib",
     description:
       "Review the education, experience at Softvence, and technical skills of Aminur Islam Sojib.",
-    images: [`${baseUrl}/sojibahmed_pfp.jpg`],
+    images: [`${baseUrl}/aminur-islam-sojib-profile-photo.jpg`],
   },
 };
 

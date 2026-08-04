@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Aminur Islam Sojib Portfolio",
     images: [
       {
-        url: `${baseUrl}/sojibahmed_pfp.jpg`,
+        url: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
         width: 1200,
         height: 630,
         alt: "Aminur Islam Sojib CV Resume",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Download CV & Resume | Aminur Islam Sojib",
     description:
       "Preview and download the official CV / resume of Aminur Islam Sojib (Sojib Ahmed).",
-    images: [`${baseUrl}/sojibahmed_pfp.jpg`],
+    images: [`${baseUrl}/aminur-islam-sojib-profile-photo.jpg`],
   },
 };
 

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Aminur Islam Sojib Portfolio",
     images: [
       {
-        url: `${baseUrl}/sojibahmed_pfp.jpg`,
+        url: `${baseUrl}/aminur-islam-sojib-profile-photo.jpg`,
         width: 1200,
         height: 630,
         alt: "Contact Aminur Islam Sojib",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "Contact Aminur Islam Sojib | Fullstack Developer",
     description:
       "Get in touch with Aminur Islam Sojib (Sojib Ahmed), Fullstack Developer in Dhaka, Bangladesh.",
-    images: [`${baseUrl}/sojibahmed_pfp.jpg`],
+    images: [`${baseUrl}/aminur-islam-sojib-profile-photo.jpg`],
   },
 };
 
