@@ -1,19 +1,13 @@
-// components/ui/skeleton.tsx
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-function Skeleton({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn(
-        "animate-pulse rounded-md bg-[#383838]/50", // Matching your border color but at lower opacity
-        className,
-      )}
+      data-slot="skeleton"
+      className={cn("animate-pulse rounded-md bg-muted", className)}
       {...props}
     />
-  );
+  )
 }
 
-export { Skeleton };
+export { Skeleton }
